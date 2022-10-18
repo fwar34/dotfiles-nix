@@ -33,10 +33,12 @@
                     modules = [
                         { networking.hostName = hostname; }
                         # General configuration (users, networking, sound, etc)
-                        ./modules/system/configuration.nix
+                        #./modules/system/configuration.nix
                         # Hardware config (bootloader, kernel modules, filesystems, etc)
                         # DO NOT USE MY HARDWARE CONFIG!! USE YOUR OWN!!
-                        (./. + "/hosts/${hostname}/hardware-configuration.nix")
+                        #(./. + "/hosts/${hostname}/hardware-configuration.nix")
+                        ./hosts/${hostname}/hardware-configuration.nix
+                        ./hosts/${hostname}/configuration.nix
                         home-manager.nixosModules.home-manager
                         {
                             home-manager = {
@@ -45,7 +47,7 @@
                                 extraSpecialArgs = { inherit inputs; };
                                 # Home manager config (configures programs like firefox, zsh, eww, etc)
                                 # users.${username} = (./. + "/hosts/${hostname}/home.nix");
-                                users.username = {
+                                users.${username} = {
                                   imports = 
                                     [
                                       ./modules/default.nix 
@@ -53,11 +55,11 @@
 				    ];
                                 };
                             };
-                            nixpkgs.overlays = [
-                                # Add nur overlay for Firefox addons
-                                nur.overlay
-                                (import ./overlays)
-                            ];
+                            # nixpkgs.overlays = [
+                            #     # Add nur overlay for Firefox addons
+                            #     nur.overlay
+                            #     (import ./overlays)
+                            # ];
                         }
                     ];
                     specialArgs = { inherit inputs username; };
@@ -70,6 +72,7 @@
                 laptop = mkSystem inputs.nixpkgs system "laptop" user;
                 desktop = mkSystem inputs.nixpkgs system "desktop" user;
                 vm = mkSystem inputs.nixpkgs system "vm" user;
+                lxc = mkSystem inputs.nixpkgs system "lxc" user;
             };
     };
 }

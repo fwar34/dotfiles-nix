@@ -14,20 +14,21 @@ in {
         programs.zsh = {
             enable = true;
 
+
             # directory to put config files in
-            # dotDir = ".config/zsh";
+            dotDir = ".config/zsh";
+
+            oh-my-zsh = {                             # Extra plugins for zsh
+              enable = true;
+              plugins = [ "git" ];
+              custom = "$HOME/.config/zsh_nix/custom";
+            };
+
+
 
             enableCompletion = true;
             enableAutosuggestions = true;
             enableSyntaxHighlighting = true;
-
-            ohMyZsh = {
-              enable = true;
-              theme = "ys";
-            };
-
-            autosuggestions.enable = true;
-            syntaxHighlighting.enable = true;
 
             # .zshrc
             # initExtra = ''
@@ -52,11 +53,11 @@ in {
             #};
 
             # Tweak settings for history
-            #history = {
-            #    save = 1000;
-            #    size = 1000;
-            #    path = "$HOME/.cache/zsh_history";
-            #};
+            history = {
+                save = 1000;
+                size = 1000;
+                path = "$HOME/.cache/zsh_history";
+            };
 
             # Set some aliases
             # shellAliases = {
