@@ -16,11 +16,12 @@ in {
 
 
             # directory to put config files in
-            dotDir = ".config/zsh";
+            dotDir = ".config/zsh_nix";
 
             oh-my-zsh = {                             # Extra plugins for zsh
               enable = true;
               plugins = [ "git" ];
+	      theme = "ys";
               custom = "$HOME/.config/zsh_nix/custom";
             };
 

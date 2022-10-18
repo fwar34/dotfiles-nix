@@ -149,6 +149,8 @@
     #     };
     # };
 
+    services.openssh.enable = true;
+
     # Do not touch
     system.stateVersion = "22.05";
 }

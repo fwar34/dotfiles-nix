@@ -12,7 +12,7 @@
         wofi.enable = false;
 
         # cli
-        nvim.enable = false;
+        nvim.enable = true;
         zsh.enable = true;
         git.enable = true;
         gpg.enable = false;
