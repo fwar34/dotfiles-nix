@@ -22,11 +22,12 @@
             system = "x86_64-linux"; #current system
             pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             lib = nixpkgs.lib;
+            user = "feng";
 
             # This lets us reuse the code to "create" a system
             # Credits go to sioodmy on this one!
             # https://github.com/sioodmy/dotfiles/blob/main/flake.nix
-            mkSystem = pkgs: system: hostname:
+            mkSystem = pkgs: system: hostname: username:
                 pkgs.lib.nixosSystem {
                     system = system;
                     modules = [
@@ -43,7 +44,14 @@
                                 useGlobalPkgs = true;
                                 extraSpecialArgs = { inherit inputs; };
                                 # Home manager config (configures programs like firefox, zsh, eww, etc)
-                                users.notus = (./. + "/hosts/${hostname}/user.nix");
+                                # users.${username} = (./. + "/hosts/${hostname}/home.nix");
+                                users.username = {
+                                  imports = 
+                                    [
+                                      ./modules/default.nix 
+                                      ./hosts/${hostname}/home.nix
+				    ];
+                                };
                             };
                             nixpkgs.overlays = [
                                 # Add nur overlay for Firefox addons
@@ -52,15 +60,16 @@
                             ];
                         }
                     ];
-                    specialArgs = { inherit inputs; };
+                    specialArgs = { inherit inputs username; };
                 };
 
         in {
             nixosConfigurations = {
                 # Now, defining a new system is can be done in one line
-                #                                Architecture   Hostname
-                laptop = mkSystem inputs.nixpkgs "x86_64-linux" "laptop";
-                desktop = mkSystem inputs.nixpkgs "x86_64-linux" "desktop";
+                #                                Architecture   Hostname Username
+                laptop = mkSystem inputs.nixpkgs system "laptop" user;
+                desktop = mkSystem inputs.nixpkgs system "desktop" user;
+                vm = mkSystem inputs.nixpkgs system "vm" user;
             };
     };
 }

@@ -1,10 +1,10 @@
 { config, lib, inputs, ...}:
 
 {
-    imports = [ ../../modules/default.nix ];
+    #imports = [ ../../modules/default.nix ];
     config.modules = {
         # gui
-        firefox.enable = true;
+        firefox.enable = false;
         foot.enable = true;
         eww.enable = true;
         dunst.enable = true;
@@ -16,7 +16,7 @@
         zsh.enable = true;
         git.enable = true;
         gpg.enable = true;
-        direnv.enable = true;
+        direnv.enablefalse = false;
 
         # system
         xdg.enable = true;
