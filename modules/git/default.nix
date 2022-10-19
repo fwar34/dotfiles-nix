@@ -9,13 +9,23 @@ in {
         programs.git = {
             enable = true;
             userName = "fwar34";
-            userEmail = "fwar345@gmail.com";
-            # extraConfig = {
-            #     init = { defaultBranch = "master"; };
-            #     core = {
-            #         excludesfile = "$NIXOS_CONFIG_DIR/scripts/gitignore";
-            #     };
-            # };
+            userEmail = "fwar34@126.com";
+            aliases = {
+                st = "status";
+                co = "checkout";
+                ci = "commit";
+                br = "branch";
+                last = "log -1";
+                lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+
+            };
+            extraConfig = {
+                init = { defaultBranch = "master"; };
+                core = {
+                    quotepath = false;
+                    autocrlf = "input";
+                };
+            };
         };
     };
 }
