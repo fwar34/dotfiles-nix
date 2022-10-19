@@ -10,12 +10,12 @@ in {
             enable = true;
             userName = "fwar34";
             userEmail = "fwar345@gmail.com";
-            extraConfig = {
-                init = { defaultBranch = "master"; };
-                core = {
-                    excludesfile = "$NIXOS_CONFIG_DIR/scripts/gitignore";
-                };
-            };
+            # extraConfig = {
+            #     init = { defaultBranch = "master"; };
+            #     core = {
+            #         excludesfile = "$NIXOS_CONFIG_DIR/scripts/gitignore";
+            #     };
+            # };
         };
     };
 }
