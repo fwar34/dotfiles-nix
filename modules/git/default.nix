@@ -25,6 +25,9 @@ in {
                     quotepath = false;
                     autocrlf = "input";
                 };
+                credential = {
+                    helper = "store";
+                };
             };
         };
     };
