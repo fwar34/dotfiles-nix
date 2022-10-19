@@ -13,6 +13,7 @@
 
         # cli
         nvim.enable = true;
+        emacs.enable = true;
         zsh.enable = true;
         git.enable = true;
         gpg.enable = false;

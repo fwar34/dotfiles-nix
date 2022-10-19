@@ -17,9 +17,10 @@
         ./git
         ./gpg
         ./direnv
+        ./emacs
 
         # system
         ./xdg
-	./packages
+        ./packages
     ];
 }
