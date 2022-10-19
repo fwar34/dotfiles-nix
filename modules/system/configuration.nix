@@ -8,6 +8,10 @@
     # Laptop-specific packages (the other ones are installed in `packages.nix`)
     environment.systemPackages = with pkgs; [
         #acpi tlp git
+        cmake
+        gnumake
+        libtool
+        gcc
     ];
 
     # Install fonts
@@ -41,46 +45,46 @@
     # };
 
     # Nix settings, auto cleanup and enable flakes
-    # nix = {
-    #     settings.auto-optimise-store = true;
-    #     settings.allowed-users = [ "${username}" ];
-    #     gc = {
-    #         automatic = true;
-    #         dates = "weekly";
-    #         options = "--delete-older-than 7d";
-    #     };
-    #     extraOptions = ''
-    #         experimental-features = nix-command flakes
-    #         keep-outputs = true
-    #         keep-derivations = true
-    #     '';
-    # };
+    nix = {
+        settings.auto-optimise-store = true;
+        settings.allowed-users = [ "${username}" ];
+        gc = {
+            automatic = true;
+            dates = "weekly";
+            options = "--delete-older-than 7d";
+        };
+        extraOptions = ''
+            experimental-features = nix-command flakes
+            keep-outputs = true
+            keep-derivations = true
+        '';
+    };
 
     # Boot settings: clean /tmp/, latest kernel and enable bootloader
-    boot = {
-        cleanTmpDir = true;
-        loader = {
-        systemd-boot.enable = true;
-        systemd-boot.editor = false;
-        efi.canTouchEfiVariables = true;
-        timeout = 0;
-        };
-    };
+    # boot = {
+    #     cleanTmpDir = true;
+    #     loader = {
+    #     systemd-boot.enable = true;
+    #     systemd-boot.editor = false;
+    #     efi.canTouchEfiVariables = true;
+    #     timeout = 0;
+    #     };
+    # };
 
     # Set up locales (timezone and keyboard layout)
-    #time.timeZone = "Aisa/Shanghai";
+    time.timeZone = "Aisa/Shanghai";
     i18n.defaultLocale = "en_US.UTF-8";
-    console = {
-        font = "Lat2-Terminus16";
-        keyMap = "us";
-    };
+    # console = {
+    #     font = "Lat2-Terminus16";
+    #     keyMap = "us";
+    # };
 
     # Set up user and enable sudo
-    users.users.${username} = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
-        shell = pkgs.zsh;
-    };
+    # users.users.${username} = {
+    #     isNormalUser = true;
+    #     extraGroups = [ "wheel" ];
+    #     shell = pkgs.zsh;
+    # };
 
     # Set up networking and secure it
     # networking = {
@@ -149,8 +153,8 @@
     #     };
     # };
 
-    #services.openssh.enable = true;
+    services.openssh.enable = true;
 
     # Do not touch
-    #system.stateVersion = "22.05";
+    system.stateVersion = "22.05";
 }
