@@ -40,10 +40,6 @@ in {
                 vim-nix
                 plenary-nvim
                 {
-                    plugin = zk-nvim;
-                    config = "require('zk').setup()";
-                }
-                {
                     plugin = jabuti-nvim;
                     config = "colorscheme jabuti";
                 }
@@ -70,7 +66,6 @@ in {
                         require('lspconfig').rust_analyzer.setup{}
                         require('lspconfig').sumneko_lua.setup{}
                         require('lspconfig').rnix.setup{}
-                        require('lspconfig').zk.setup{}
                         EOF
                     '';
                 }
